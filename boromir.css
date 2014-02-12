@@ -1,0 +1,73 @@
+/* 
+    Document   : boromir.css
+    Created on : Feb 12, 2014, 4:14:04 PM
+    Author     : Austin Stanley <maxtmahem@gmail.com>
+    Description:
+        Style boromir.css
+*/
+
+body {
+  position: relative;
+  background: #111111;
+  color: #f0f0f0;
+  font-family: Monaco, "Lucida Console", Futura, monospace;
+  font-size: small;
+  overflow: hidden;
+  -moz-transition: top 0.25s;
+  -webkit-transition: top 0.25s;
+  -o-transition: top 0.25s;
+}
+
+p {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;  
+}
+
+p.combat {
+  opacity: 0.0;
+  -moz-transition: opacity 0.25s;
+  -webkit-transition: opacity 0.25s;
+  -o-transition: opacity 0.25s;
+}
+
+p.combat.transition {
+  opacity: 1.0;
+}
+
+p.combat.status + p.combat.hero,
+p.combat.status + p.combat.villain,
+p.combat.hero + p.combat.villain,
+p.combat.villain + p.combat.hero {
+  padding-top: 1em;
+}
+
+p.combat.status {
+  padding-top: 1em;
+  white-space: pre;
+  color: gray;
+}
+
+p.combat.status:before {
+  content: '(';
+}
+
+p.combat.status:after {
+  content: ')';
+}
+
+p.combat.hit, p.combat.miss, p.combat.stumble {
+  padding-left: 2em;
+}
+
+p.combat.death {
+  padding-bottom: 1em;
+}
+
+p.combat.stumble {
+  font-style: italic;
+}
+
+a {
+  color: inherit;
+}
+
