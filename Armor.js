@@ -1,4 +1,4 @@
-var Armor = new Object;
+var Armor = Equipment;
 
 Armor.LIGHTARMORS = [
 //    name,              GP, AC, DEX, Weight
@@ -24,18 +24,7 @@ Armor.ARMORS = Armor.LIGHTARMORS.concat(Armor.MEDIUMARMORS, Armor.HEAVYARMORS);
 Armor.makeArmor = function(name, type) {
     type = typeof type !== 'undefined' ? type : Armor.ARMORS;
 
-    function makeEquippable(name, array, factory) {
-	if (name == "random")
-	    return factory(Combat.utils.randomChoice(array));
-
-	for (var i = 0; i < array.length; i++)
-	    if (array[i][0] == name)
-		return factory(array[i]);
-
-	throw new Error("unknown equippable: " + name);
-    }
-
-    return makeEquippable(name, type, function(info) {
+    return this.makeEquippable(name, type, function(info) {
 	return Combat.Armor({
           name: info[0],
 	  armorBonus: info[2],

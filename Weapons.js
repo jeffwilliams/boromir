@@ -1,4 +1,4 @@
-var Weapons = new Object;
+var Weapons = Equipment;
 
 // Crit refers to crit range, distance from 20 you need to roll to crit. So
 // a crit range of 20 is 0, 19-20 is 1, 18-20 is 3, ect.
@@ -27,18 +27,7 @@ Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEA
 Weapons.makeWeapon = function(name, type) {
     type = typeof type !== 'undefined' ? type : this.WEAPONS;
 
-    function makeEquippable(name, array, factory) {
-    if (name == "random")
-	return factory(Combat.utils.randomChoice(array));
-
-	for (var i = 0; i < array.length; i++)
-	    if (array[i][0] == name)
-		return factory(array[i]);
-
-	throw new Error("unknown equippable: " + name);
-    }
-
-    return makeEquippable(name, type, function(info) {
+    return this.makeEquippable(name, type, function(info) {
 	return Combat.Weapon({
 		name: info[0],
 		damage: info[2],
