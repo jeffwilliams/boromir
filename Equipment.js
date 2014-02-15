@@ -1,6 +1,6 @@
 var Equipment = new Object;
 
-Equipment.makeEquippable = function(name, array, factory) {
+Equipment.selectEquipment = function(name, array, factory) {
     if (name == "random") {
         return factory(Combat.utils.randomChoice(array));
     }

@@ -27,7 +27,7 @@ Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEA
 Weapons.makeWeapon = function(name, type) {
     type = typeof type !== 'undefined' ? type : this.WEAPONS;
 
-    return this.makeEquippable(name, type, function(info) {
+    return this.selectEquipment(name, type, function(info) {
 	return Combat.Weapon({
 		name: info[0],
 		damage: info[2],

@@ -24,7 +24,7 @@ Armor.ARMORS = Armor.LIGHTARMORS.concat(Armor.MEDIUMARMORS, Armor.HEAVYARMORS);
 Armor.makeArmor = function(name, type) {
     type = typeof type !== 'undefined' ? type : Armor.ARMORS;
 
-    return this.makeEquippable(name, type, function(info) {
+    return this.selectEquipment(name, type, function(info) {
 	return Combat.Armor({
           name: info[0],
 	  armorBonus: info[2],

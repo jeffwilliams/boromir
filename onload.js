@@ -4,42 +4,37 @@ onresize = scrollToBottom;
 ontouchstart = function(event) { event.preventDefault(); };
 
 onload = function() {
-  var boromir = Combat.Creature({
-    name: "Gimli",
-    gender: "male",
-    isUnique: true,
-    level: 15,
-    str: 17,
-    dex: 10,
-    con: 17,
-    hp: 128, // 15d10 + 83 Con
-    parts: WORDS.humanoidParts,
-    stumbles: WORDS.stumbles
-  });
+  var Gimli = new Creature();
+  
+  Gimli.name     = "Gimli";
+  Gimli.isUnique = true;
+  Gimli.level    = 15;
+  Gimli.attributes.str = 15;
+  Gimli.attributes.dex = 8;
+  Gimli.attributes.con = 17;
+  
+  var hero = Gimli.make();
 
-  boromir.equipWeapon(Weapons.makeWeapon("greataxe"));
-  boromir.equipArmor(Armor.makeArmor("chainmail"));
+  hero.equipWeapon(Weapons.makeWeapon("greataxe"));
+  hero.equipArmor(Armor.makeArmor("chainmail"));
 
-  function makeOrc() {
-    var orc = Combat.Creature({
-      name: "orc",
-      gender: "male",
-      isUnique: false,
-      level: 4,
-      str: 15,
-      dex: 12,
-      con: 13,
-      hp: 30,
-      parts: WORDS.humanoidParts,
-      stumbles: WORDS.stumbles
-    });
+  var Orc = new Creature();
+  
+  Orc.name  = "orc";
+  Orc.level = 4;
+  Orc.attributes.str = 15;
+  Orc.attributes.dex = 8;
+  Orc.attributes.con = 17;
 
+  Orc.makeOrc = function() {
+    orc = this.make();
+    
     orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAPONS));
     orc.equipArmor(Armor.makeArmor("random", Armor.LIGHTARMORS));
     return orc;
   }
   
-  var output = Output(boromir);
+  var output = Output(hero);
   var view = Grammar.View();
   var narrator = Combat.Narrator(view, output);
   var attack = Combat.MeleeAttack(narrator);
@@ -74,16 +69,16 @@ onload = function() {
     }
   }
 
-  for (var count = 0; boromir.hp > 0; count++) {
-    var orc = makeOrc();
-    output.emit("intro", orc.indefiniteName + " wielding " +
-                orc.weapon.indefiniteName + " approaches!");
-    combat(orc, boromir);
+  for (var count = 0; hero.hp > 0; count++) {
+    var villian = Orc.makeOrc();
+    output.emit("intro", villian.indefiniteName + " wielding " +
+                villian.weapon.indefiniteName + " approaches!");
+    combat(villian, hero);
     output.pause(3);
   }
 
   output.emit("conclusion", "After killing " + (count-1) + " " +
-              orc.name + "s, " + boromir.name + " died.");
+              villian.name + "s, " + hero.name + " died.");
 
   output.playback();
 };
