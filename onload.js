@@ -17,9 +17,9 @@ onload = function() {
     stumbles: WORDS.stumbles
   });
 
-//  boromir.equipWeapon(Boromir.utils.makeWeapon("greataxe"));
   boromir.equipWeapon(Weapons.makeWeapon("greataxe"));
-  boromir.equipArmor(Boromir.utils.makeArmor("chainmail"));
+  boromir.equipArmor(Armor.makeArmor("chainmail"));
+//  boromir.equipArmor(Boromir.utils.makeArmor("chainmail"));
 
   function makeOrc() {
     var orc = Combat.Creature({
@@ -35,7 +35,7 @@ onload = function() {
       stumbles: WORDS.stumbles
     });
 
-    orc.equipWeapon(Weapons.makeWeapon("random"));
+    orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAONS));
     orc.equipArmor(Boromir.utils.makeArmor("random"));
     return orc;
   }

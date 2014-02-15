@@ -1,4 +1,4 @@
-var Boromir = (function(Combat) {
+var Boromir = function(Combat) {
   
   var LIGHTARMORS = [
 //    name,              GP, AC, DEX, Weight
@@ -65,4 +65,4 @@ var Boromir = (function(Combat) {
     ARMORS:  ARMORS,
     utils:   utils
   };
-})(Combat);
+}(Combat);
