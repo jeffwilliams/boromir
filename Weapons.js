@@ -1,4 +1,4 @@
-var Weapons = new Object
+var Weapons = new Object;
 
 // Crit refers to crit range, distance from 20 you need to roll to crit. So
 // a crit range of 20 is 0, 19-20 is 1, 18-20 is 3, ect.
@@ -22,10 +22,10 @@ Weapons.HEAVYWEAPONS = [
         [ "greataxe",        20, "1d12",    0,    3,  12, "slash" ],
 ];
   
-Weapons.ALLWEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEAVYWEAPONS)
+Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEAVYWEAPONS)
 
 Weapons.makeWeapon = function(name, type) {
-    type = typeof type !== 'undefined' ? type : this.ALLWEAPONS;
+    type = typeof type !== 'undefined' ? type : this.WEAPONS;
 
     function makeEquippable(name, array, factory) {
     if (name == "random")
