@@ -13,11 +13,12 @@ onload = function() {
     dex: 10,
     con: 17,
     hp: 128, // 15d10 + 83 Con
-    parts: Boromir.WORDS.humanoidParts,
-    stumbles: Boromir.WORDS.stumbles
+    parts: WORDS.humanoidParts,
+    stumbles: WORDS.stumbles
   });
 
-  boromir.equipWeapon(Boromir.utils.makeWeapon("greataxe"));
+//  boromir.equipWeapon(Boromir.utils.makeWeapon("greataxe"));
+  boromir.equipWeapon(Weapons.makeWeapon("greataxe"));
   boromir.equipArmor(Boromir.utils.makeArmor("chainmail"));
 
   function makeOrc() {
@@ -30,12 +31,12 @@ onload = function() {
       dex: 12,
       con: 13,
       hp: 30,
-      parts: Boromir.WORDS.humanoidParts,
-      stumbles: Boromir.WORDS.stumbles
+      parts: WORDS.humanoidParts,
+      stumbles: WORDS.stumbles
     });
 
-    orc.equipWeapon(Boromir.utils.makeWeapon("random"));
-    orc.equipArmor(Boromir.utils.makeArmor("cloth"));
+    orc.equipWeapon(Weapons.makeWeapon("random"));
+    orc.equipArmor(Boromir.utils.makeArmor("random"));
     return orc;
   }
   
