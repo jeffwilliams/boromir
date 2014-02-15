@@ -12,6 +12,7 @@ onload = function() {
   Gimli.attributes.str = 15;
   Gimli.attributes.dex = 8;
   Gimli.attributes.con = 17;
+  Gimli.hitDieType = "d10";
   
   var hero = Gimli.make();
 
@@ -22,15 +23,17 @@ onload = function() {
   
   Orc.name  = "orc";
   Orc.level = 4;
-  Orc.attributes.str = 15;
-  Orc.attributes.dex = 8;
-  Orc.attributes.con = 17;
-
+  
   Orc.makeOrc = function() {
+    Orc.attributes.roll3d6();
+    Orc.attributes.str += 4;
+    Orc.attributes.con += 1;  // Orcs should get an attribute advancement at 4.
+
     orc = this.make();
     
     orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAPONS));
     orc.equipArmor(Armor.makeArmor("random", Armor.LIGHTARMORS));
+    
     return orc;
   }
   

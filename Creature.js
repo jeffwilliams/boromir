@@ -11,10 +11,18 @@ var Creature = function() {
     this.attributes = {
         str: 10,
         dex: 10,
-        con: 10
+        con: 10,
+        roll3d6: function() {
+            this.str = Combat.utils.dieRoll("3d6");
+            this.dex = Combat.utils.dieRoll("3d6");
+            this.con = Combat.utils.dieRoll("3d6");
+        }
     };
 
     this.hitDieType = "d8";
+    
+    // a log for storing HP rolls.
+    this.HPlog = new Object();
 
     this.HUMANOIDPARTS = {
         light:  [ "fingers",   "hand",     "shoulder",  "arm",        "foot",  "leg" ],
@@ -26,14 +34,25 @@ var Creature = function() {
     this.parts = this.HUMANOIDPARTS;
 
     this.rollHP = function() {
-        // concat level onto hitdie to make an appropriate die roll ie (1d8)
-        var classHP = Combat.utils.dieRoll(this.level + this.hitDieType);
+        var HP      = 0;
+        // calculate con hp, it's static so we can just do it once.
+        var conHP   = Combat.utils.abilityMod(this.attributes.con);
+                
+        for (var level=1; level <= this.level; level++) {
+            // roll class hp, add con HP.
+            var rollHP  = Combat.utils.dieRoll(1 + this.hitDieType);
+            var levelHP = rollHP + conHP
+            
+            // HP must always be at least 1.
+            var addHP = (levelHP > 1) ? levelHP : 1;
+            
+            HP += addHP;
+            
+            // log the HP roll
+            this.HPlog[level] = { level: level, hitdie: this.hitDieType, rollHP: rollHP, conHP: conHP, HP: HP};
+        };
 
-        // calculate con hp
-        var conHP   = Combat.utils.abilityMod(this.attributes.con) * this.level;
-
-        // return the combination as hp.
-        return classHP + conHP
+        return HP;
     };
 
     this.make = function() {
@@ -49,7 +68,7 @@ var Creature = function() {
             parts:    this.parts,
             stumbles: WORDS.stumbles
         };
-
+        
         return Combat.Creature(creature);
     }
 }

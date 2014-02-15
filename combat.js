@@ -176,7 +176,7 @@ var Combat = (function(Grammar) {
         return utils.dieRoll('1d20') + self.mod(name);
       },
       maxHp: function() {
-        return self.maxBaseHp + (self.mod('con') * self.level);
+        return self.maxBaseHp;
       },
       fullyHeal: function() {
         self.hp = self.maxHp();
