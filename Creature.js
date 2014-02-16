@@ -21,8 +21,6 @@ var Creature = function() {
             
             // sort the array from high to low
             attributes.sort(function(a,b){return a-b}).reverse();
-//            attributes.reverse();
-            console.log(attributes);
             
             this.str = attributes[attributeOrder.str];
             this.dex = attributes[attributeOrder.dex];

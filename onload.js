@@ -34,8 +34,6 @@ onload = function() {
     orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAPONS));
     orc.equipArmor(Armor.makeArmor("random", Armor.LIGHTARMORS));
     
-    console.log({str: orc.str, dex: orc.dex, con: orc.con})
-    
     return orc;
   }
   
