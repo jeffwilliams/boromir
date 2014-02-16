@@ -107,10 +107,11 @@ var Combat = (function(Grammar) {
       damageRoll: function(attackRoll) {
         var numTimes = 1;
         var damage = 0;
+        var strDamage = (self.type === "two handed") ? Math.floor(self.wearer.mod('str')) : self.wearer.mod('str');
         if (self.isAttackRollCritical(attackRoll))
           numTimes = self.critMultiplier;
         for (var i = 0; i < numTimes; i++)
-          damage += utils.dieRoll(self.damage) + self.wearer.mod('str');
+          damage += utils.dieRoll(self.damage) + strDamage;
         return damage;
       }
     });
