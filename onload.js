@@ -9,8 +9,8 @@ onload = function() {
   Gimli.name     = "Gimli";
   Gimli.isUnique = true;
   Gimli.level    = 15;
-  Gimli.attributes.str = 15;
-  Gimli.attributes.dex = 8;
+  Gimli.attributes.str = 17;
+  Gimli.attributes.dex = 13;
   Gimli.attributes.con = 17;
   Gimli.hitDieType = "d10";
   
@@ -53,7 +53,7 @@ onload = function() {
 
     function statusStr(creature) {
       return creature.name + ": " + creature.hp + "/" + creature.maxHp() +
-             " HP";
+             " HP AC " + creature.armorClass();
     }
 
     while (1) {
