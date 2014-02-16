@@ -1,6 +1,7 @@
 var Creature = function() {
 
     this.name    = "undefined";
+    
     this.GENDERS = [ "male", "female", "neuter" ];
     this.gender  = "male";
 
@@ -36,24 +37,15 @@ var Creature = function() {
     };
 
     this.hitDieType = "d8";
-    
-    // a log for storing HP rolls.
-    this.HPlog = new Object();
-
-    this.HUMANOIDPARTS = {
-        light:  [ "fingers",   "hand",     "shoulder",  "arm",        "foot",  "leg" ],
-        medium: [ "right arm", "left arm", "right leg", "left leg",   "side",  "flank" ],
-        heavy:  [ "thigh",     "stomach",  "knee",      "midsection", "torso", "ribcage", "back" ],
-        fatal:  [ "chest",     "head",     "neck",      "spine",      "skull", "eyes" ]
-    }
-
-    this.parts = this.HUMANOIDPARTS;
 
     this.rollHP = function() {
         var HP      = 0;
         // calculate con hp, it's static so we can just do it once.
         var conHP   = Combat.utils.abilityMod(this.attributes.con);
-                
+
+        // a log for storing HP rolls.
+        this.HPlog = new Object();
+        
         for (var level=1; level <= this.level; level++) {
             // roll class hp, add con HP.
             var rollHP  = Combat.utils.dieRoll(1 + this.hitDieType);
@@ -70,6 +62,15 @@ var Creature = function() {
 
         return HP;
     };
+    
+    this.HUMANOIDPARTS = {
+        light:  [ "fingers",   "hand",     "shoulder",  "arm",        "foot",  "leg" ],
+        medium: [ "right arm", "left arm", "right leg", "left leg",   "side",  "flank" ],
+        heavy:  [ "thigh",     "stomach",  "knee",      "midsection", "torso", "ribcage", "back" ],
+        fatal:  [ "chest",     "head",     "neck",      "spine",      "skull", "eyes" ]
+    }
+
+    this.parts = this.HUMANOIDPARTS;
 
     this.make = function() {
         var creature = {
