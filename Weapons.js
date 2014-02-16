@@ -27,14 +27,14 @@ Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEA
 Weapons.makeWeapon = function(name, type) {
     type = typeof type !== 'undefined' ? type : this.WEAPONS;
 
-    return this.selectEquipment(name, type, function(info) {
-	return Combat.Weapon({
-		name: info[0],
-		damage: info[2],
-		isUnique: false,
-		critRange: info[3],
-		critMultiplier: info[4],
-		words: WORDS[info[6]]
-	});
+    var equipmentSelected = this.selectEquipment(name, type)
+    
+    return Combat.Weapon({
+        name: equipmentSelected[0],
+	damage: equipmentSelected[2],
+	isUnique: false,
+	critRange: equipmentSelected[3],
+	critMultiplier: equipmentSelected[4],
+        words: WORDS[equipmentSelected[6]]
     });
 };

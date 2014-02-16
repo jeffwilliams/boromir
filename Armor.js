@@ -2,9 +2,8 @@ var Armor = Equipment;
 
 Armor.LIGHTARMORS = [
 //    name,              GP, AC, DEX, Weight
-    [ "cloth",            0,  0,   8,  1 ],
-    [ "padded",           5,  1,   8,  10 ],
-    [ "leather",         10,  2,   6,  15 ],
+    [ "padded armor",     5,  1,   8,  10 ],
+    [ "leather armor",   10,  2,   6,  15 ],
     [ "chain shirt",    100,  4,   4,  25 ],
 ];
   
@@ -23,12 +22,12 @@ Armor.ARMORS = Armor.LIGHTARMORS.concat(Armor.MEDIUMARMORS, Armor.HEAVYARMORS);
 
 Armor.makeArmor = function(name, type) {
     type = typeof type !== 'undefined' ? type : Armor.ARMORS;
+    
+    var equipmentSelected = this.selectEquipment(name, type)
 
-    return this.selectEquipment(name, type, function(info) {
-	return Combat.Armor({
-          name: info[0],
-	  armorBonus: info[2],
+    return Combat.Armor({
+          name: equipmentSelected[0],
+	  armorBonus: equipmentSelected[2],
 	  isUnique: false
-	});
     });
 };

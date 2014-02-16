@@ -75,7 +75,8 @@ onload = function() {
   for (var count = 0; hero.hp > 0; count++) {
     var villian = Orc.makeOrc();
     output.emit("intro", villian.indefiniteName + " wielding " +
-                villian.weapon.indefiniteName + " approaches!");
+                villian.weapon.indefiniteName + " and wearing " + 
+                villian.armor.name + " approaches!");
     combat(villian, hero);
     output.pause(3);
   }
