@@ -12,10 +12,21 @@ var Creature = function() {
         str: 10,
         dex: 10,
         con: 10,
-        roll3d6: function() {
-            this.str = Combat.utils.dieRoll("3d6");
-            this.dex = Combat.utils.dieRoll("3d6");
-            this.con = Combat.utils.dieRoll("3d6");
+        roll3d6: function(attributeOrder) {
+            // generate an array of stats.
+            var attributes = new Array();
+            for (var attributeNum = 1; attributeNum <= 6; attributeNum++) {
+                attributes[attributeNum] = Combat.utils.dieRoll("3d6");
+            }
+            
+            // sort the array from high to low
+            attributes.sort(function(a,b){return a-b}).reverse();
+//            attributes.reverse();
+            console.log(attributes);
+            
+            this.str = attributes[attributeOrder.str];
+            this.dex = attributes[attributeOrder.dex];
+            this.con = attributes[attributeOrder.con];
         }
     };
 
