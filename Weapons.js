@@ -1,4 +1,4 @@
-var Weapons = Equipment;
+var Weapons = new Equipment();
 
 // Crit refers to crit range, distance from 20 you need to roll to crit. So
 // a crit range of 20 is 0, 19-20 is 1, 18-20 is 3, ect.

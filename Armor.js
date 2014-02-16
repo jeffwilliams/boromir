@@ -1,4 +1,4 @@
-var Armor = Equipment;
+var Armor = new Equipment();
 
 Armor.LIGHTARMORS = [
 //    name,              GP, AC, DEX, Weight
