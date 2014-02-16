@@ -31,11 +31,5 @@ var WORDS = {
 	"%(o_name)s stagger<s>...", 
 	"%(o_name)s fall<s> to %(o_his)s knees!", 
 	"%(name)s trip[s] %(o_name)s and %(o_he)s fall<s> to the ground!" ]
-    ],
-    humanoidParts: {
-      light:  [ "fingers",   "hand",     "shoulder",  "arm", "foot", "leg" ],
-      medium: [ "right arm", "left arm", "right leg", "left leg", "side", "flank" ],
-      heavy:  [ "thigh",     "stomach",  "knee",      "midsection", "torso", "ribcage", "back" ],
-      fatal:  [ "chest",     "head",     "neck",      "spine", "skull", "eyes" ]
-    }
+    ]
 };
