@@ -25,7 +25,7 @@ onload = function() {
   Orc.level = 4;
   
   Orc.makeOrc = function() {
-    Orc.attributes.roll3d6({str: 1, dex: 3, con: 2});
+    Orc.attributes.roll3d6Ordered({str: 1, dex: 3, con: 2});
     Orc.attributes.str += 4;
     Orc.attributes.con += 1;  // Orcs should get an attribute advancement at 4.
 
