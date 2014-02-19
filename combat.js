@@ -20,7 +20,7 @@ var Combat = (function(Grammar) {
       return Math.floor((score - 2) / 2) - 4;
     },
     getRandomInt: function(min, max) {  
-      return Math.floor(Math.random() * (max - min + 1)) + min;  
+      return Math.floor(random() * (max - min + 1)) + min;  
     },
     dieRoll: function(num, sides, plus) {
       var sum = 0;

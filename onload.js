@@ -3,11 +3,14 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = 2.231;
-var versionText = "Version number slightly more dynamic!";
+var versionNumber = .300;
+var versionText = "New seeded random number generator!";
 
 onload = function() {
-    document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
+  document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
+  
+  var seedString = seed.toString(16).toUpperCase();
+  var seedName = seedString.slice(0, 5) + '-' + seedString.slice(5)
     
   var Gimli = new Creature();
   
@@ -46,6 +49,11 @@ onload = function() {
   var view = Grammar.View();
   var narrator = Combat.Narrator(view, output);
   var attack = Combat.MeleeAttack(narrator);
+  
+  output.emit("start", hero.name + ": " + seedName + " slaps his " + 
+	      hero.weapon.name + " against his " + hero.armor.name +
+	      " eagerly!");
+  output.pause(1);
 
   function combat(p1, p2) {
     var m = [[p1, p2], [p2, p1]];
@@ -87,7 +95,7 @@ onload = function() {
   }
 
   output.emit("conclusion", "After killing " + (count-1) + " " +
-              villian.name + "s, " + hero.name + " died.");
+              villian.name + "s, " + hero.name + ": " + seedName + " died.");
 
   output.playback();
 };

@@ -50,6 +50,10 @@ p.combat.villain + p.combat.hero {
   padding-top: 1em;
 }
 
+p.combat.start {
+    padding-bottom: 1em;
+}
+
 p.combat.status {
   padding-top: 1em;
   white-space: pre;

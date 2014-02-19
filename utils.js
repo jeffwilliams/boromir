@@ -1,3 +1,9 @@
+var seed = Date.now();
+function random() {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+}
+
 function scrollToBottom() {
   var ODD_EXTRA_SPACE = 16;
   var windowHeight = window.innerHeight ||
