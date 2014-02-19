@@ -4,57 +4,36 @@ onresize = scrollToBottom;
 ontouchstart = function(event) { event.preventDefault(); };
 
 onload = function() {
-  var str    = 17;
-  var con    = 17;
-  var level  = 15;
-  var hitdie = "d10";
+  var Gimli = new Creature();
   
-  var classhp = Combat.utils.dieRoll(level+hitdie);
-  var conhp   = Combat.utils.abilityMod(con) * level;
-  var hp      = classhp + conhp;
-    
-  var hero = Combat.Creature({
-    name: "Gimli",
-    gender: "male",
-    isUnique: true,
-    level: level,
-    str: str,
-    dex: 10,
-    con: con,
-    hp: hp,
-//    hp: 128, // 15d10 + 83 Con
-    parts: WORDS.humanoidParts,
-    stumbles: WORDS.stumbles
-  });
+  Gimli.name     = "Gimli";
+  Gimli.isUnique = true;
+  Gimli.level    = 15;
+  Gimli.attributes.str = 17;
+  Gimli.attributes.dex = 13;
+  Gimli.attributes.con = 17;
+  Gimli.hitDieType = "d10";
+  
+  var hero = Gimli.make();
 
   hero.equipWeapon(Weapons.makeWeapon("greataxe"));
   hero.equipArmor(Armor.makeArmor("chainmail"));
 
-  var str    = 15;
-  var con    = 13;
-  var level  = 4;
-  var hitdie = "d8";
+  var Orc = new Creature();
   
-  var classhp = Combat.utils.dieRoll(level+hitdie);
-  var conhp   = Combat.utils.abilityMod(con) * level;
-  var hp      = classhp + conhp;
+  Orc.name  = "orc";
+  Orc.level = 4;
   
-  function makeOrc() {
-    var orc = Combat.Creature({
-      name: "orc",
-      gender: "male",
-      isUnique: false,
-      level: level,
-      str: str,
-      dex: 12,
-      con: con,
-      hp: hp,
-      parts: WORDS.humanoidParts,
-      stumbles: WORDS.stumbles
-    });
+  Orc.makeOrc = function() {
+    Orc.attributes.roll3d6Ordered({str: 1, dex: 3, con: 2});
+    Orc.attributes.str += 4;
+    Orc.attributes.con += 1;  // Orcs should get an attribute advancement at 4.
 
+    orc = this.make();
+    
     orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAPONS));
     orc.equipArmor(Armor.makeArmor("random", Armor.LIGHTARMORS));
+    
     return orc;
   }
   
@@ -74,7 +53,7 @@ onload = function() {
 
     function statusStr(creature) {
       return creature.name + ": " + creature.hp + "/" + creature.maxHp() +
-             " HP";
+             " HP AC " + creature.armorClass();
     }
 
     while (1) {
@@ -94,15 +73,16 @@ onload = function() {
   }
 
   for (var count = 0; hero.hp > 0; count++) {
-    var orc = makeOrc();
-    output.emit("intro", orc.indefiniteName + " wielding " +
-                orc.weapon.indefiniteName + " approaches!");
-    combat(orc, hero);
+    var villian = Orc.makeOrc();
+    output.emit("intro", villian.indefiniteName + " wielding " +
+                villian.weapon.indefiniteName + " and wearing " + 
+                villian.armor.name + " approaches!");
+    combat(villian, hero);
     output.pause(3);
   }
 
   output.emit("conclusion", "After killing " + (count-1) + " " +
-              orc.name + "s, " + hero.name + " died.");
+              villian.name + "s, " + hero.name + " died.");
 
   output.playback();
 };

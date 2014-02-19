@@ -1,6 +1,16 @@
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+function Equipment() {
 
+    this.selectEquipment = function(name, array) {
+        if (name == "random") {
+            return Combat.utils.randomChoice(array);
+        }
 
+        for (var i = 0; i < array.length; i++) {
+            if (array[i][0] == name) {
+                return array[i];
+            }
+        }
+
+        throw new Error("unknown equippable: " + name);
+    }
+}

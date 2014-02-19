@@ -1,10 +1,9 @@
-var Armor = new Object;
+var Armor = new Equipment();
 
 Armor.LIGHTARMORS = [
 //    name,              GP, AC, DEX, Weight
-    [ "cloth",            0,  0,   8,  1 ],
-    [ "padded",           5,  1,   8,  10 ],
-    [ "leather",         10,  2,   6,  15 ],
+    [ "padded armor",     5,  1,   8,  10 ],
+    [ "leather armor",   10,  2,   6,  15 ],
     [ "chain shirt",    100,  4,   4,  25 ],
 ];
   
@@ -23,23 +22,39 @@ Armor.ARMORS = Armor.LIGHTARMORS.concat(Armor.MEDIUMARMORS, Armor.HEAVYARMORS);
 
 Armor.makeArmor = function(name, type) {
     type = typeof type !== 'undefined' ? type : Armor.ARMORS;
+    
+    var equipmentSelected = this.selectEquipment(name, type)
 
-    function makeEquippable(name, array, factory) {
-	if (name == "random")
-	    return factory(Combat.utils.randomChoice(array));
-
-	for (var i = 0; i < array.length; i++)
-	    if (array[i][0] == name)
-		return factory(array[i]);
-
-	throw new Error("unknown equippable: " + name);
-    }
-
-    return makeEquippable(name, type, function(info) {
-	return Combat.Armor({
-          name: info[0],
-	  armorBonus: info[2],
+    return Combat.Armor({
+          name: equipmentSelected[0],
+	  armorBonus: equipmentSelected[2],
 	  isUnique: false
-	});
+    });
+};
+
+var Shield = new Equipment();
+
+Shield.SHIELDS = [
+//    name,                  GP, AC, DEX, ACP, Weight
+    [ "light wooden shield",  3,  1,    ,  -1,  5 ],
+    [ "light metal shield",   9,  1,    ,  -1,  6 ],
+    [ "heavy wooden shield",  7,  2,    ,  -2, 10 ],
+    [ "heavy metal shield",  20,  2,    ,  -2, 15 ],
+    [ "tower shield",        30,  4,   2, -10, 45 ],
+];
+
+Shield.NONE = [
+    [ "no shield",            0,  0,    ,   0,  0 ],
+]
+
+Shield.makeShield = function(name, type) {
+    type = typeof type !== 'undefined' ? type : Shield.SHIELDS;
+    
+    var equipmentSelected = this.selectEquipment(name, type)
+
+    return Combat.Shield({
+          name: equipmentSelected[0],
+	  armorBonus: equipmentSelected[2],
+	  isUnique: false
     });
 };
