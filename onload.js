@@ -3,11 +3,13 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .300;
-var versionText = "New seeded random number generator!";
+var versionNumber = .310;
+var versionText = "New seeded SHAREABLE random number generator!";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
+  
+  seed = GetSeed();
   
   var seedString = seed.toString(16).toUpperCase();
   var seedName = seedString.slice(0, 5) + '-' + seedString.slice(5)
@@ -96,6 +98,9 @@ onload = function() {
 
   output.emit("conclusion", "After killing " + (count-1) + " " +
               villian.name + "s, " + hero.name + ": " + seedName + " died.");
+  output.emit("link", "Share this <a href='http://boromir.maxmahem.net/?seed=" +
+	      seedName + "'>Gimli's URL</a>, or roll a " + 
+	      "<a href='http://boromir.maxmahem.net/'>new one!</a>")
 
   output.playback();
 };

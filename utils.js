@@ -4,6 +4,31 @@ function random() {
     return x - Math.floor(x);
 }
 
+// this code adapted from http://www.jquerybyexample.net/2012/06/get-url-parameters-using-jquery.html
+function GetURLParameter(parameter) {
+    var pageURL      = window.location.search.substring(1);
+    var URLVariables = pageURL.split('&');
+    
+    for (var i = 0; i < URLVariables.length; i++) {
+	var parameterName = URLVariables[i].split('=');
+	if (parameterName[0] === parameter) {
+	    return parameterName[1];
+	}
+    }
+}
+
+function GetSeed() {
+    var seedParameter = GetURLParameter("seed");
+    
+    // if seed is undefined (not set) return time.
+    if ((typeof seedParameter) === "undefined") {
+	return Date.now();
+    } else {
+	// if seed is set, strip any '-' and convert it to a number from hex.
+	return parseInt(seedParameter.replace('-', ''), 16);
+    }
+}
+
 function scrollToBottom() {
   var ODD_EXTRA_SPACE = 16;
   var windowHeight = window.innerHeight ||
@@ -25,7 +50,7 @@ function Output(hero) {
     if (message.attacker)
       baseClass += " " + message.attacker;
     p.setAttribute("class", baseClass);
-    p.appendChild(document.createTextNode(message.text));
+    p.innerHTML = message.text;
     document.body.appendChild(p);
     setTimeout(function() {
       p.setAttribute("class", baseClass + " transition");
