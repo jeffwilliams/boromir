@@ -18,6 +18,14 @@ body {
   -o-transition: top 0.25s;
 }
 
+h1, h2 {
+    margin-bottom: 0;
+}
+
+h2 {
+    margin-top: 0;
+}
+
 p {
   margin-top: 0.25em;
   margin-bottom: 0.25em;  

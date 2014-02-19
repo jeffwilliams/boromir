@@ -3,7 +3,11 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
+var versionText = "0.22 - Version number now dynamic!"
+
 onload = function() {
+    document.getElementById("Version").innerHTML=versionText;
+    
   var Gimli = new Creature();
   
   Gimli.name     = "Gimli";
