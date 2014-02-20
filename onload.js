@@ -10,7 +10,6 @@ onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
   
   var simulateButton = document.getElementById("simulate");
-  console.log(simulateButton);
   simulateButton.onclick = doSimulation;
 };
  
