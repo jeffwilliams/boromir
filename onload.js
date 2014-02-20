@@ -3,8 +3,8 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .35;
-var versionText = "Orc levels now Random! (2d4)";
+var versionNumber = .36;
+var versionText = "Gimli stats now 4d6 drop lowest.";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
@@ -19,9 +19,11 @@ onload = function() {
   Gimli.name     = "Gimli";
   Gimli.isUnique = true;
   Gimli.level    = 15;
-  Gimli.attributes.str = 17;
-  Gimli.attributes.dex = 13;
-  Gimli.attributes.con = 17;
+  
+  Gimli.attributes.rollOrdered({str: 1, dex: 4, con: 2}, Gimli.attributes.roll4d6DropLowest);
+  Gimli.attributes.con += 2; // racial bonus.
+  
+  console.log(Gimli);
   Gimli.hitDieType = "d10";
   
   var hero = Gimli.make();
@@ -37,7 +39,6 @@ onload = function() {
   Orc.makeOrc = function() {
     Orc.attributes.rollOrdered({str: 1, dex: 3, con: 2}, Orc.attributes.roll3d6);
     Orc.attributes.str += 4;
-    Orc.attributes.con += 1;  // Orcs should get an attribute advancement at 4.
 
     console.log(Orc);
     orc = this.make();

@@ -15,7 +15,21 @@ var Creature = function() {
         con:  10,
         type: "static",
 	roll3d6: function roll3d6() {    
-	    return Combat.utils.dieRoll("roll 3d6");
+	    return Combat.utils.dieRoll("3d6");
+	},
+	roll4d6DropLowest: function roll4d6DropLowest() {
+	    var rolls = new Array();
+
+	    for (var rollNum = 1; rollNum <= 4; rollNum++) {
+                rolls[rollNum] = Combat.utils.dieRoll("1d6");
+            }
+	    
+	    // sort the array from high to low
+            rolls.sort(function(a,b){return a-b}).reverse();
+	    
+	    // return the sum of the first 3.
+	    return rolls[1] + rolls[2] + rolls[3];
+	    
 	},
         // rolls stats and lets them be assigned in desired order.
         rollOrdered: function rollOrdered(attributeOrder, rollFunction) {
