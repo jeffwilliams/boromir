@@ -39,6 +39,7 @@ onload = function() {
     Orc.attributes.str += 4;
     Orc.attributes.con += 1;  // Orcs should get an attribute advancement at 4.
 
+    console.log(Orc);
     orc = this.make();
     
     orc.equipWeapon(Weapons.makeWeapon("random", Weapons.MEDIUMWEAPONS));
