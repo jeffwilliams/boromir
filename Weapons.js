@@ -25,8 +25,14 @@ Weapons.HEAVYWEAPONS = [
     [ "greatsword", "2d6",    1,    2, "slash",    "two handed" ],
     [ "greataxe",  "1d12",    0,    3, "slash",    "two handed" ],
 ];
+
+Weapons.RANGED = [
+    [ "longbow",    "1d8",    0,    3, "pierce",   "ranged" ],
+]
   
-Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS, Weapons.HEAVYWEAPONS)
+Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS,
+					      Weapons.HEAVYWEAPONS,
+					      Weapons.RANGED)
 
 Weapons.makeWeapon = function(name, type) {
     type = typeof type !== 'undefined' ? type : this.WEAPONS;

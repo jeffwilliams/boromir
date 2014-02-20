@@ -3,33 +3,68 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .36;
-var versionText = "Gimli stats now 4d6 drop lowest.";
+var versionNumber = .4;
+var versionText = "What? Elves are in this now? HACKS.";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
   
-  seed = GetSeed();
-  
-  var seedString = seed.toString(16).toUpperCase();
-  var seedName = seedString.slice(0, 5) + '-' + seedString.slice(5)
+  var simulateButton = document.getElementById("simulate");
+  console.log(simulateButton);
+  simulateButton.onclick = doSimulation;
+};
+ 
+var doSimulation = function doSimulation(event) {
+    console.log(event);
     
-  var Gimli = new Creature();
-  
-  Gimli.name     = "Gimli";
-  Gimli.isUnique = true;
-  Gimli.level    = 15;
-  
-  Gimli.attributes.rollOrdered({str: 1, dex: 4, con: 2}, Gimli.attributes.roll4d6DropLowest);
-  Gimli.attributes.con += 2; // racial bonus.
-  
-  console.log(Gimli);
-  Gimli.hitDieType = "d10";
-  
-  var hero = Gimli.make();
+    event.preventDefault();
 
-  hero.equipWeapon(Weapons.makeWeapon("greataxe"));
-  hero.equipArmor(Armor.makeArmor("chainmail"));
+    seed = GetSeed();
+  
+    var seedString = seed.toString(16).toUpperCase();
+    var seedName = seedString.slice(0, 5) + '-' + seedString.slice(5);
+    
+    var heroValue = document.getElementById("hero").value;
+    
+    var heroName, heroAttributeOrder, heroAttributeBonus, heroWeapon, heroArmor;
+    
+    switch (heroValue) {
+	case "Gimli":
+	default:
+	    heroName           = "Gimli";
+	    heroAttributeOrder = {str: 1, dex: 4, con: 2};
+	    heroAttributeBonus = {str: 0, dex: 0, con: 2};
+	    heroWeapon         = Weapons.makeWeapon("greataxe");
+	    heroArmor          = Armor.makeArmor("chainmail");
+	    break;
+	case "Legolas":
+	    heroName           = "Legolas";
+	    heroAttributeOrder = {str: 5, dex: 1, con: 4};
+	    heroAttributeBonus = {str: 0, dex: 2, con: 0};
+	    heroWeapon         = Weapons.makeWeapon("longbow");
+	    heroArmor          = Armor.makeArmor("leather armor");
+	    break;
+    }
+    
+  var Hero = new Creature();
+  
+  Hero.name     = heroName;
+  Hero.isUnique = true;
+  Hero.level    = 15;
+  
+  Hero.attributes.rollOrdered(heroAttributeOrder, Hero.attributes.roll4d6DropLowest);
+  
+    Hero.attributes.str += heroAttributeBonus.str; // racial bonus.
+    Hero.attributes.dex += heroAttributeBonus.dex; // racial bonus.
+    Hero.attributes.con += heroAttributeBonus.con; // racial bonus.
+  
+  console.log(Hero);
+  Hero.hitDieType = "d10";
+  
+  var hero = Hero.make();
+
+  hero.equipWeapon(heroWeapon);
+  hero.equipArmor(heroArmor);
 
   var Orc = new Creature();
   
