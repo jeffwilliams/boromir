@@ -14,14 +14,17 @@ var Creature = function() {
         dex:  10,
         con:  10,
         type: "static",
+	roll3d6: function() {
+	    return Combat.utils.dieRoll("3d6");
+	},
         // rolls stats and lets them be assigned in desired order.
-        roll3d6Ordered: function(attributeOrder) {
+        rollOrdered: function(attributeOrder, rollFunction) {
             this.type = "roll 3d6 ordered";
             
             // generate an array of stats.
             var attributes = new Array();
             for (var attributeNum = 1; attributeNum <= 6; attributeNum++) {
-                attributes[attributeNum] = Combat.utils.dieRoll("3d6");
+                attributes[attributeNum] = rollFunction();
             }
             
             // sort the array from high to low
@@ -32,12 +35,12 @@ var Creature = function() {
             this.con = attributes[attributeOrder.con];
         },
         // rolls stats in order
-        roll3d6InOrder: function() {
+        rollInOrder: function(rollFunction) {
             this.type = "roll 3d6 in order"
             
-            this.str = Combat.utils.dieRoll("3d6");
-            this.dex = Combat.utils.dieRoll("3d6");
-            this.con = Combat.utils.dieRoll("3d6");
+            this.str = Combat.utils.dieRoll(rollFunction);
+            this.dex = Combat.utils.dieRoll(rollFunction);
+            this.con = Combat.utils.dieRoll(rollFunction);
         }
     };
 
