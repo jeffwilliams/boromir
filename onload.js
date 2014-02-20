@@ -3,8 +3,8 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .310;
-var versionText = "New seeded SHAREABLE random number generator!";
+var versionNumber = .35;
+var versionText = "Orc levels now Random! (2d4)";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
@@ -32,7 +32,7 @@ onload = function() {
   var Orc = new Creature();
   
   Orc.name  = "orc";
-  Orc.level = 4;
+  Orc.level = Combat.utils.dieRoll("2d4");
   
   Orc.makeOrc = function() {
     Orc.attributes.roll3d6Ordered({str: 1, dex: 3, con: 2});
