@@ -31,6 +31,9 @@ var doSimulation = function doSimulation(event) {
     
     var heroValue = document.getElementById("hero").value;
     
+    // remove elment now.
+    var formElements = document.getElementById("heroform").remove();
+    
     var heroName, heroAttributeOrder, heroAttributeBonus, heroWeapon, heroArmor;
     
     switch (heroValue) {
