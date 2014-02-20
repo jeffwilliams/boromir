@@ -13,9 +13,7 @@ onload = function() {
   simulateButton.onclick = doSimulation;
 };
  
-var doSimulation = function doSimulation(event) {
-    console.log(event);
-    
+var doSimulation = function doSimulation(event) {    
     event.preventDefault();
 
     seed = GetSeed();

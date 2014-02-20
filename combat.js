@@ -101,6 +101,7 @@ var Combat = (function(Grammar) {
       words: options.words,
       critRange: options.critRange,
       critMultiplier: options.critMultiplier,
+      type: options.type,
       isAttackRollCritical: function(attackRoll) {
         return (attackRoll >= 20 - self.critRange);
       },
@@ -268,15 +269,26 @@ var Combat = (function(Grammar) {
 
     function oneAttack(attacker, defender, baseAttackBonus, roundNumber) {
       var attackRoll = dieRoll('1d20');
-      var attack = attackRoll + baseAttackBonus + attacker.mod('str');
+      var attackModStat = (attacker.weapon.type == "ranged") ? 'dex' : 'str';
+      var attackMod = attacker.mod(attackModStat);
+      var attack = attackRoll + baseAttackBonus + attackMod;
       var defense = defender.armorClass();
+      
+      var attackLog = attacker.name + " 1d20:" + attackRoll + "+" + 
+	              baseAttackBonus + "BAB+" + attackMod + attackModStat +
+		      "=" + attack + " vs " + defender.name + " AC" + defense;
 
       if (defender.hp == 0)
         return;
 
       if (attack >= defense) {
         var damage = attacker.weapon.damageRoll(attackRoll);
+	
+	attackLog += " Hit! " + damage + " damage";
+	console.log(attackLog);
+	
         narrator.hit(attacker, defender, damage, attackRoll, roundNumber);
+	
         defender.loseHp(damage);
       } else {
         narrator.miss(attacker, defender);
