@@ -64,7 +64,7 @@ onload = function() {
     
     output.emit("begin", p1.definiteName + " and " + p2.definiteName +
                 " close in and begin to fight!");
-    output.pause(2);
+    output.pause(1);
 
     function statusStr(creature) {
       return creature.name + ": " + creature.hp + "/" + creature.maxHp() +
@@ -82,7 +82,7 @@ onload = function() {
           output.emit("death", defender.definiteName + " has been killed!");
           return;
         }
-        output.pause(3);
+        output.pause(1);
       }
     }
   }
