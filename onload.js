@@ -11,6 +11,14 @@ onload = function() {
   
   var simulateButton = document.getElementById("simulate");
   simulateButton.onclick = doSimulation;
+  
+    var heroParameter = GetURLParameter("hero");
+    
+    // if hero parameter is set is set, set the value to it and do simulation.
+    if ((typeof heroParameter) !== "undefined") {
+	document.getElementById("hero").value = heroParameter;
+	simulateButton.click();
+    }
 };
  
 var doSimulation = function doSimulation(event) {    
@@ -130,11 +138,12 @@ var doSimulation = function doSimulation(event) {
     output.pause(3);
   }
 
-  output.emit("conclusion", "After killing " + (count-1) + " " +
-              villian.name + "s, " + hero.name + ": " + seedName + " died.");
-  output.emit("link", "Share this <a href='http://boromir.maxmahem.net/?seed=" +
-	      seedName + "'>Gimli's URL</a>, or roll a " + 
-	      "<a href='http://boromir.maxmahem.net/'>new one!</a>")
+    var linkUrl = "http://boromir.maxmahem.net/?hero=" + hero.name + "&seed=" +
+	          seedName;
+    output.emit("conclusion", "After killing " + (count-1) + " " +
+                 villian.name + "s, " + hero.name + ": " + seedName + " died.");
+    output.emit("link", "Share this <a href='" + linkUrl + "'>" + hero.name + 
+                "'s URL</a>, or roll a <a href='http://boromir.maxmahem.net/'>new one!</a>");
 
   output.playback();
 };
