@@ -16,9 +16,12 @@ body {
   -moz-transition: top 0.25s;
   -webkit-transition: top 0.25s;
   -o-transition: top 0.25s;
+  margin-top: 0;
+  padding: 1em;
 }
 
 h1, h2 {
+    margin-top:    0;
     margin-bottom: 0;
     font-weight: normal;
 }
