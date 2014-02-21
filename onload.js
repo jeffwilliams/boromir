@@ -3,8 +3,8 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .4;
-var versionText = "What? Elves are in this now? HACKS.";
+var versionNumber = .42;
+var versionText = "Magic weapons!";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
@@ -32,7 +32,7 @@ var doSimulation = function doSimulation(event) {
     var heroValue = document.getElementById("hero").value;
     
     // remove elment now.
-    var formElements = document.getElementById("heroform").remove();
+    document.getElementById("heroform").remove();
     
     var heroName, heroAttributeOrder, heroAttributeBonus, heroWeapon, heroArmor;
     
@@ -51,6 +51,20 @@ var doSimulation = function doSimulation(event) {
 	    heroAttributeBonus = {str: 0, dex: 2, con: 0};
 	    heroWeapon         = Weapons.makeWeapon("longbow");
 	    heroArmor          = Armor.makeArmor("leather armor");
+	    break;
+	case "Boromir":
+    	    heroName           = "Boromir";
+	    heroAttributeOrder = {str: 1, dex: 2, con: 3};
+	    heroAttributeBonus = {str: 0, dex: 0, con: 0};
+	    heroWeapon         = Weapons.makeWeapon("longsword");
+	    heroArmor          = Armor.makeArmor("chainmail");
+	    break;
+	case "Aragorn":
+    	    heroName           = "Aragorn";
+	    heroAttributeOrder = {str: 1, dex: 2, con: 3};
+	    heroAttributeBonus = {str: 0, dex: 0, con: 0};
+	    heroWeapon         = Weapons.makeWeapon("Andúril");
+	    heroArmor          = Armor.makeArmor("chainmail");
 	    break;
     }
     

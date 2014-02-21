@@ -102,6 +102,7 @@ var Combat = (function(Grammar) {
       critRange: options.critRange,
       critMultiplier: options.critMultiplier,
       type: options.type,
+      bonus: options.bonus,
       isAttackRollCritical: function(attackRoll) {
         return (attackRoll >= 20 - self.critRange);
       },
@@ -112,7 +113,7 @@ var Combat = (function(Grammar) {
         if (self.isAttackRollCritical(attackRoll))
           numTimes = self.critMultiplier;
         for (var i = 0; i < numTimes; i++)
-          damage += utils.dieRoll(self.damage) + strDamage;
+          damage += utils.dieRoll(self.damage) + strDamage + this.bonus;
         return damage;
       }
     });
@@ -271,11 +272,13 @@ var Combat = (function(Grammar) {
       var attackRoll = dieRoll('1d20');
       var attackModStat = (attacker.weapon.type == "ranged") ? 'dex' : 'str';
       var attackMod = attacker.mod(attackModStat);
-      var attack = attackRoll + baseAttackBonus + attackMod;
+      var weaponBonus = attacker.weapon.bonus;
+      var attack = attackRoll + baseAttackBonus + attackMod + weaponBonus;
       var defense = defender.armorClass();
       
       var attackLog = attacker.name + " 1d20:" + attackRoll + "+" + 
-	              baseAttackBonus + "BAB+" + attackMod + attackModStat +
+	              baseAttackBonus + "BAB+" + weaponBonus + "weap+" + 
+		      attackMod + attackModStat + 
 		      "=" + attack + " vs " + defender.name + " AC" + defense;
 
       if (defender.hp == 0)
