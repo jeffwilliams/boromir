@@ -28,7 +28,7 @@ Weapons.HEAVYWEAPONS = [
 
 Weapons.RANGED = [
     [ "longbow",     "1d8",    0,    3, "pierce",   "ranged",     0 ],
-]
+];
 
 Weapons.MAGIC = [
     [ "Sting",       "1d6",    1,    2, "pierce",   "light",      2 ],
@@ -36,7 +36,7 @@ Weapons.MAGIC = [
     [ "Glamdring",   "1d10",   1,    2, "pierce",   "two handed", 2 ],
     [ "Orcrist",     "1d8",    1,    2, "slash",    "one handed", 2 ],
     [ "Barrow Blade", "1d6",  1,    2, "pierce",   "light",       2 ]
-]
+];
   
 Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS,
 					      Weapons.HEAVYWEAPONS,
