@@ -37,7 +37,12 @@ Weapons.MAGIC = [
     [ "Orcrist",      "1d8",    1,    2, "slash",    "one handed", 2 ],
     [ "Barrow Blade", "1d6",    1,    2, "pierce",   "light",      2 ]
 ];
-  
+ 
+Weapons.EVIL = [
+  [ "whip of flame",  "2d6",    2,    2, "whip",     "one handed", 2 ],
+  [ "black axe",      "2d6",    2,    2, "slash",    "one handed", 2 ] 
+];
+ 
 Weapons.WEAPONS = Weapons.LIGHTWEAPONS.concat(Weapons.MEDIUMWEAPONS,
 					      Weapons.HEAVYWEAPONS,
 					      Weapons.RANGED,

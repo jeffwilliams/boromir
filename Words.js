@@ -18,6 +18,12 @@ var WORDS = {
       medium: [ "pound[s]", "beat[s]", "batter[s]", "hammer[s]", "slug[s]" ],
       heavy:  [ "hurl[s] %(his)s %(weapon)s into", "hammer[s] %(his)s %(weapon)s into", "drive[s] %(his)s %(weapon)s into" ]
     },
+    whip: {
+      light:  [ "scrape[s]",    "scratch[es]", "graze[s]", ],
+      medium: [ "cut[s] into",  "wound[s]",    "slash[es]", "snap[s] across", ],
+      heavy:  [ "tear[s] %(his)s %(weapon)s into",
+    "crack[s] %(his)s %(weapon)s across", ],
+    },
     stumbles: [
       [ "%(o_name)s tr<ies|y> to anticipate %(name_pos)s attack, but miscalculate<s>...",
 	"%(o_name)s <is|are> caught off-guard for a moment...!",

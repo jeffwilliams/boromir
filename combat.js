@@ -4,7 +4,9 @@ var Combat = (function(Grammar) {
     [1], [2], [3], [4], [5], [6,1], [7,2], [8,3], [9,4],
     [10,5], [11,6,1], [12,7,2], [13,8,3], [14,9,4],
     [15,10,5], [16,11,6,1], [17,12,7,2], [18,13,8,3],
-    [19,14,9,4], [20,15,10,5]
+    [19,14,9,4], [20,15,10,5],
+    [20,16,11,6,1], [20,17,12,7,2], [20,18,13,8,3], [20,19,14,9,4], [20,20,15,10,5],
+    [20,20,16,11,6,1], [20,20,17,12,7,2], [20,20,18,13,8,3], [20,20,19,14,9,4], [20,20,20,15,10,5]
   ];
   
   var utils = {
@@ -165,7 +167,7 @@ var Combat = (function(Grammar) {
         self.armor = armor;
       },
       armorClass: function() {
-        return 10 + self.armor.armorBonus + self.mod('dex');
+        return 10 + (self.armor ? self.armor.armorBonus : 0) + self.mod('dex');
       },
       baseAttackBonus: function() {
         return ATTACKS_PER_ROUND[self.level - 1];

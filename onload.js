@@ -3,8 +3,8 @@ onresize = scrollToBottom;
 // Prevent touch-based scrolling.
 ontouchstart = function(event) { event.preventDefault(); };
 
-var versionNumber = .42;
-var versionText = "Magic weapons!";
+var versionNumber = .43;
+var versionText = "The ancient evil stirs...";
 
 onload = function() {
   document.getElementById("Version").innerHTML=versionNumber + ' - ' + versionText;
@@ -106,6 +106,25 @@ var doSimulation = function doSimulation(event) {
     return orc;
   }
   
+  var Balrog = new Creature();
+
+  Balrog.name = "Balrog"
+  Balrog.level = Combat.utils.dieRoll("15d2");
+
+  Balrog.makeBalrog = function() {
+    Balrog.attributes.rollOrdered({str: 1, dex: 3, con: 2}, Orc.attributes.roll4d6DropLowest);
+    Balrog.attributes.str += 4;
+    Balrog.attributes.dex += 4;
+    Balrog.attributes.con += 4;
+
+    console.log(Balrog);
+    balrog = this.make();
+
+    balrog.equipWeapon(Weapons.makeWeapon("random", Weapons.EVIL));
+
+    return balrog;
+  }
+
   var output = Output(hero);
   var view = Grammar.View();
   var narrator = Combat.Narrator(view, output);
@@ -147,10 +166,22 @@ var doSimulation = function doSimulation(event) {
   }
 
   for (var count = 0; hero.hp > 0; count++) {
-    var villian = Orc.makeOrc();
-    output.emit("intro", villian.indefiniteName + " wielding " +
-                villian.weapon.indefiniteName + " and wearing " + 
-                villian.armor.name + " approaches!");
+    //var villian = Orc.makeOrc();
+    var villian = Balrog.makeBalrog();
+
+    var msg = "";
+    if ( villian.armor ) {
+      msg = villian.indefiniteName + " wielding " +
+            villian.weapon.indefiniteName + " and wearing " + 
+            villian.armor.name + " approaches!";
+    }
+    else {
+      msg = villian.indefiniteName + " wielding " +
+            villian.weapon.indefiniteName + " approaches!";
+    }
+
+    output.emit("intro", msg);
+
     combat(villian, hero);
     output.pause(3);
   }
