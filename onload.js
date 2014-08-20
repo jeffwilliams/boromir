@@ -166,8 +166,13 @@ var doSimulation = function doSimulation(event) {
   }
 
   for (var count = 0; hero.hp > 0; count++) {
-    //var villian = Orc.makeOrc();
-    var villian = Balrog.makeBalrog();
+    var villian = null;
+
+    if (random() <= 0.01){
+      villian = Balrog.makeBalrog();
+    } else {
+      villian = Orc.makeOrc();
+    }
 
     var msg = "";
     if ( villian.armor ) {
